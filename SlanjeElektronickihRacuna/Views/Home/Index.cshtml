@@ -1,0 +1,68 @@
+﻿@model SlanjeElektronickihRacuna.eRacuni.InformacijePosiljatelja
+
+@{
+    ViewData["Title"] = "Slanje eRačuna";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Slanje elektroničkog računa</h1>
+</div>
+<br />
+<hr />
+
+<div class="text-center">
+    @if (!string.IsNullOrEmpty(ViewBag.slanjeOk))
+    {
+        <p style="color:green;">@ViewBag.slanjeOk</p>
+    }
+    else if (!string.IsNullOrEmpty(ViewBag.slanjeNotOk))
+    {
+        <p style="color:darkred;">@ViewBag.slanjeNotOk <a href="https://www.moj-eracun.hr/exchange/validateubl\" target="_blank">eRačun validator</a></p>
+    }
+    <div class="col-md-4" style="display:inline-block">
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="checkbox" style="text-align: right;">
+                <label asp-for="Demo" class="control-label"></label>
+                <input asp-for="Demo" />
+            </div>
+            <div class="form-group">
+                <label asp-for="KorisnickoIme" class="control-label"></label>
+                <input asp-for="KorisnickoIme" style="text-align: center;" class="form-control" />
+                <span asp-validation-for="KorisnickoIme" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lozinka" class="control-label"></label>
+                <input asp-for="Lozinka" style="text-align: center;" class="form-control" />
+                <span asp-validation-for="Lozinka" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OibTvrtke" class="control-label"></label>
+                <input asp-for="OibTvrtke" style="text-align: center;" class="form-control" />
+                <span asp-validation-for="OibTvrtke" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PoslovnaJedinica" class="control-label"></label>
+                <input asp-for="PoslovnaJedinica" style="text-align: center;" class="form-control" />
+                <span asp-validation-for="PoslovnaJedinica" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoftverId" class="control-label"></label>
+                <input asp-for="SoftverId" style="text-align: center;" class="form-control" />
+                <span asp-validation-for="SoftverId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="file" for="file">Upload datoteke s diska:</label>
+                <input asp-for="file" type="file" name="file" id="file" accept=".xml" />
+                <span asp-validation-for="file" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Pošalji na moj eRačun" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
